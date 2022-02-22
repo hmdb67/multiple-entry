@@ -30,6 +30,11 @@ function webpackMultipleEntries(config) {
   const defaultEntryHTMLPlugin = config.plugins.filter((plugin) => {
     return plugin.constructor.name === "HtmlWebpackPlugin";
   })[0];
+
+  // For react-scripts 4
+  // defaultEntryHTMLPlugin.options.chunks = [defaultEntryName];
+
+  // For react-scripts 5
   defaultEntryHTMLPlugin.userOptions.chunks = [defaultEntryName];
 
   // config.entry is not an array in Create React App 4
@@ -45,8 +50,14 @@ function webpackMultipleEntries(config) {
   rewireEntries.forEach((entry) => {
     multipleEntry[entry.name] = necessaryEntry.concat(entry.entry);
     // Multiple Entry HTML Plugin
+
+    console.log("Using react-scripts v5 for this CRACO config");
     config.plugins.unshift(
       new defaultEntryHTMLPlugin.constructor(
+        // For react-scripts 4
+        // Object.assign({}, defaultEntryHTMLPlugin.options, {
+
+        // For react-scripts 5
         Object.assign({}, defaultEntryHTMLPlugin.userOptions, {
           filename: entry.outPath,
           template: entry.template,
