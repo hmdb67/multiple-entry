@@ -1,30 +1,34 @@
-const path = require('path');
+const path = require("path");
 
 const rewireEntries = [
   {
-    name: 'albuminfo',
-    entry: path.resolve(__dirname, './src/albuminfo/index.js'),
-    template: path.resolve(__dirname, './src/albuminfo/index.html'),
-    outPath: 'albuminfo/index.html',
+    name: "albuminfo",
+    entry: path.resolve(__dirname, "./src/albuminfo/index.js"),
+    template: path.resolve(__dirname, "./src/albuminfo/index.html"),
+    outPath: "albuminfo/index.html",
   },
   {
-    name: 'sound',
-    entry: path.resolve(__dirname, './src/sound/index.js'),
-    template: path.resolve(__dirname, './src/sound/index.html'),
-    outPath: 'sound/index.html',
+    name: "sound",
+    entry: path.resolve(__dirname, "./src/sound/index.js"),
+    template: path.resolve(__dirname, "./src/sound/index.html"),
+    outPath: "sound/index.html",
+  },
+  {
+    name: "sign-off",
+    entry: path.resolve(__dirname, "./src/sign-off/LogoutPage.js"),
+    template: path.resolve(__dirname, "./public/index.html"),
+    outPath: "sign-off/index.html",
   },
 ];
 
-const defaultEntryName = 'main';
+const defaultEntryName = "main";
 
-const appIndexes = ['js', 'tsx', 'ts', 'jsx'].map((ext) =>
-  path.resolve(__dirname, `src/index.${ext}`)
-);
+const appIndexes = ["js", "tsx", "ts", "jsx"].map((ext) => path.resolve(__dirname, `src/index.${ext}`));
 
 function webpackMultipleEntries(config) {
   // Multiple Entry JS
   const defaultEntryHTMLPlugin = config.plugins.filter((plugin) => {
-    return plugin.constructor.name === 'HtmlWebpackPlugin';
+    return plugin.constructor.name === "HtmlWebpackPlugin";
   })[0];
   defaultEntryHTMLPlugin.userOptions.chunks = [defaultEntryName];
 
@@ -34,10 +38,7 @@ function webpackMultipleEntries(config) {
   }
 
   // If there is only one entry file then it should not be necessary for the rest of the entries
-  const necessaryEntry =
-    config.entry.length === 1
-      ? []
-      : config.entry.filter((file) => !appIndexes.includes(file));
+  const necessaryEntry = config.entry.length === 1 ? [] : config.entry.filter((file) => !appIndexes.includes(file));
   const multipleEntry = {};
   multipleEntry[defaultEntryName] = config.entry;
 
@@ -57,11 +58,11 @@ function webpackMultipleEntries(config) {
   config.entry = multipleEntry;
 
   // Multiple Entry Output File
-  let names = config.output.filename.split('/').reverse();
+  let names = config.output.filename.split("/").reverse();
 
-  if (names[0].indexOf('[name]') === -1) {
-    names[0] = '[name].' + names[0];
-    config.output.filename = names.reverse().join('/');
+  if (names[0].indexOf("[name]") === -1) {
+    names[0] = "[name]." + names[0];
+    config.output.filename = names.reverse().join("/");
   }
 
   return config;
