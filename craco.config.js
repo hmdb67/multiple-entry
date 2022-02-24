@@ -34,6 +34,7 @@ function webpackMultipleEntries(config) {
   // For react-scripts 4
   // defaultEntryHTMLPlugin.options.chunks = [defaultEntryName];
 
+  console.log("Using react-scripts v5 for this craco.config.js");
   // For react-scripts 5
   defaultEntryHTMLPlugin.userOptions.chunks = [defaultEntryName];
 
@@ -51,7 +52,7 @@ function webpackMultipleEntries(config) {
     multipleEntry[entry.name] = necessaryEntry.concat(entry.entry);
     // Multiple Entry HTML Plugin
 
-    console.log("Using react-scripts v5 for this CRACO config");
+    
     config.plugins.unshift(
       new defaultEntryHTMLPlugin.constructor(
         // For react-scripts 4
