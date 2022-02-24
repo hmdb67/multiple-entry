@@ -1,6 +1,6 @@
 # Multiple Entry-Points Example For CRA and CRACO
 
-### This is an example on how to create muliple entries to an isolated page, different to main entry (home->index.js->App.js). It could run unauthenticated from your home page. Used a plain `create-react-app` v5 using vanilla JS and CRACO. I run it with both React 4 and 5 by uncommenting the 2 obvious lines of code in `craco.config.js` ()..
+### This is an example on how to create muliple entries to an isolated page, different to main entry, ie (home->index.js->App.js). It could run unauthenticated from your home page. Used a plain `create-react-app` v5 using vanilla JS and CRACO. I run it with both React 4 and 5 by uncommenting the 2 obvious lines of code in `craco.config.js`
 
 This is a simplified version using [cra-multi-entry-demo](https://github.com/helsonxiao/cra-multi-entry-demo). Thank you *helsonxiao* you saved my butt.
 
